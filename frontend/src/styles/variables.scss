@@ -1,0 +1,148 @@
+// ============================================
+// 44img Design System - Warm Gray + Neumorphism
+// Inspired by Apple & Issey Miyake
+// ============================================
+
+// Light Mode (Default)
+:root {
+  // Background colors - Warm gray palette
+  --bg-primary: #FAFAF9;
+  --bg-secondary: #F5F5F4;
+  --bg-tertiary: #E7E5E4;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FAFAF9;
+  
+  // Text colors
+  --text-primary: #18181B;
+  --text-secondary: #52525B;
+  --text-tertiary: #A1A1AA;
+  --text-inverse: #FAFAFA;
+  
+  // Accent colors - Muted, sophisticated
+  --accent-primary: #18181B;
+  --accent-primary-hover: #27272A;
+  --accent-primary-bg: rgba(24, 24, 27, 0.1);
+  --accent-secondary: #78716C;
+  --accent-success: #365314;
+  --accent-success-bg: #ECFCCB;
+  --accent-warning: #854D0E;
+  --accent-warning-bg: #FEF9C3;
+  --accent-danger: #991B1B;
+  --accent-danger-bg: #FEE2E2;
+  
+  // Border colors
+  --border-light: #E7E5E4;
+  --border-medium: #D6D3D1;
+  --border-dark: #A8A29E;
+  
+  // Neumorphism shadows - Light mode
+  --shadow-neu-flat: 
+    6px 6px 12px rgba(166, 162, 157, 0.25),
+    -6px -6px 12px rgba(255, 255, 255, 0.8);
+  --shadow-neu-pressed:
+    inset 4px 4px 8px rgba(166, 162, 157, 0.25),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  --shadow-neu-convex:
+    8px 8px 16px rgba(166, 162, 157, 0.3),
+    -8px -8px 16px rgba(255, 255, 255, 0.9);
+  
+  // Subtle shadows for cards
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  
+  // Spacing
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  // Transitions
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Typography
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+  
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
+  // Z-index
+  --z-dropdown: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
+
+// Dark Mode - Apple-inspired with better contrast
+[data-theme="dark"] {
+  // Background colors - Layered depth like Apple's dark mode
+  --bg-primary: #000000;
+  --bg-secondary: #1C1C1E;
+  --bg-tertiary: #2C2C2E;
+  --bg-card: #1C1C1E;
+  --bg-card-hover: #2C2C2E;
+  
+  // Text colors - High contrast for readability
+  --text-primary: #FFFFFF;
+  --text-secondary: #EBEBF5;
+  --text-tertiary: #8E8E93;
+  --text-inverse: #000000;
+  
+  // Accent colors - Vibrant for dark mode
+  --accent-primary: #FFFFFF;
+  --accent-primary-hover: #F5F5F7;
+  --accent-primary-bg: rgba(255, 255, 255, 0.12);
+  --accent-secondary: #8E8E93;
+  --accent-success: #30D158;
+  --accent-success-bg: rgba(48, 209, 88, 0.16);
+  --accent-warning: #FFD60A;
+  --accent-warning-bg: rgba(255, 214, 10, 0.16);
+  --accent-danger: #FF453A;
+  --accent-danger-bg: rgba(255, 69, 58, 0.16);
+  
+  // Border colors - Visible but subtle
+  --border-light: #38383A;
+  --border-medium: #48484A;
+  --border-dark: #636366;
+  
+  // Button-specific colors for better visibility
+  --btn-secondary-bg: #2C2C2E;
+  --btn-secondary-border: #48484A;
+  --btn-secondary-hover-bg: #3A3A3C;
+  --btn-ghost-hover-bg: rgba(255, 255, 255, 0.08);
+  
+  // Input colors
+  --input-bg: #1C1C1E;
+  --input-border: #38383A;
+  --input-focus-border: #636366;
+  
+  // Neumorphism shadows - Subtle for dark mode
+  --shadow-neu-flat:
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-neu-pressed:
+    inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-neu-convex:
+    0 4px 12px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.4);
+  
+  // Subtle shadows - More visible
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+}

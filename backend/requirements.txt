@@ -1,0 +1,67 @@
+# FastAPI and server
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.9
+
+# Database
+sqlalchemy>=2.0.36
+aiosqlite>=0.20.0
+aiomysql>=0.2.0
+alembic>=1.14.0
+
+# Redis (optional)
+redis>=5.2.0
+
+# Authentication
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+pydantic[email]>=2.10.0
+pydantic-settings>=2.6.0
+
+# Image processing
+Pillow>=10.4.0
+python-magic>=0.4.27
+# Windows: pip install python-magic-bin
+# Linux: apt install libmagic1
+
+# Email
+aiosmtplib>=3.0.2
+email-validator>=2.2.0
+
+# Cloud storage SDKs (optional, install when needed)
+# S3 Compatible (AWS S3, Cloudflare R2, MinIO, etc.)
+boto3>=1.35.0
+# Aliyun OSS (native SDK)
+# oss2>=2.18.0
+# Tencent Cloud COS (native SDK)
+# cos-python-sdk-v5>=1.9.0
+
+# Content moderation (optional, install separately)
+# pip install alibabacloud_imageaudit20191230
+# alibabacloud_imageaudit20191230>=3.0.0
+# alibabacloud_tea_openapi>=0.3.0
+# alibabacloud_tea_util>=0.3.0
+
+# Security
+itsdangerous>=2.2.0
+slowapi>=0.1.9
+
+# Utilities
+python-dotenv>=1.0.1
+httpx>=0.28.0
+aiofiles>=24.1.0
+pytz>=2024.1
+
+# Scheduler for backup tasks
+apscheduler>=3.10.0
+
+# Testing
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+
+# Backup backends
+aioftp>=0.22.0
+asyncssh>=2.14.0
+aioboto3>=12.0.0
+aiohttp>=3.9.0
+cryptography>=41.0.0

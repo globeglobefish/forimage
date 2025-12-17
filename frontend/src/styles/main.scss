@@ -1,0 +1,895 @@
+@use './variables.scss';
+
+// ============================================
+// Global Reset & Base Styles
+// ============================================
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+// ============================================
+// Typography
+// ============================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+p {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  
+  &:hover {
+    color: var(--text-secondary);
+  }
+}
+
+// ============================================
+// Layout Components
+// ============================================
+
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+// ============================================
+// Card - Neumorphism Style
+// ============================================
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-neu-flat);
+  transition: all var(--transition-base);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-neu-convex);
+  }
+  
+  &--flat {
+    box-shadow: var(--shadow-md);
+    
+    &:hover {
+      box-shadow: var(--shadow-lg);
+    }
+  }
+  
+  &--pressed {
+    box-shadow: var(--shadow-neu-pressed);
+    
+    &:hover {
+      box-shadow: var(--shadow-neu-pressed);
+      transform: none;
+    }
+  }
+}
+
+// ============================================
+// Buttons - Apple-inspired Style
+// ============================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  // Primary - Solid
+  &--primary {
+    background: var(--accent-primary);
+    color: var(--text-inverse);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-sm);
+    
+    &:hover:not(:disabled) {
+      background: var(--accent-primary-hover);
+      border-color: var(--accent-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+  
+  // Secondary - With visible border in dark mode
+  &--secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-sm);
+    
+    &:hover:not(:disabled) {
+      background: var(--bg-tertiary);
+      border-color: var(--border-dark);
+    }
+    
+    &:active:not(:disabled) {
+      box-shadow: none;
+    }
+  }
+  
+  // Ghost - Minimal with hover state
+  &--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border-color: transparent;
+    
+    &:hover:not(:disabled) {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border-color: var(--border-light);
+    }
+  }
+  
+  // Outline - Clear border
+  &--outline {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-medium);
+    
+    &:hover:not(:disabled) {
+      background: var(--bg-secondary);
+      border-color: var(--border-dark);
+    }
+  }
+  
+  // Sizes
+  &--sm {
+    padding: 8px 16px;
+    font-size: var(--text-xs);
+    border-radius: var(--radius-sm);
+  }
+  
+  &--lg {
+    padding: 16px 32px;
+    font-size: var(--text-base);
+    border-radius: var(--radius-md);
+  }
+}
+
+// ============================================
+// Upload Area - Neumorphism Style
+// ============================================
+
+.upload-area {
+  position: relative;
+  border-radius: var(--radius-xl);
+  padding: 60px 40px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-neu-pressed);
+  border: 2px dashed transparent;
+  transition: all var(--transition-base);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: calc(var(--radius-xl) - 4px);
+    border: 1px dashed var(--border-medium);
+    pointer-events: none;
+    transition: border-color var(--transition-fast);
+  }
+  
+  &:hover,
+  &.is-dragover {
+    background: var(--bg-tertiary);
+    
+    &::before {
+      border-color: var(--text-tertiary);
+    }
+  }
+  
+  &.is-dragover {
+    transform: scale(1.01);
+  }
+  
+  &:focus {
+    outline: none;
+    
+    &::before {
+      border-color: var(--text-secondary);
+    }
+  }
+  
+  .upload-icon {
+    font-size: 48px;
+    color: var(--text-tertiary);
+    margin-bottom: 20px;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+  }
+  
+  &:hover .upload-icon,
+  &.is-dragover .upload-icon {
+    color: var(--text-secondary);
+    transform: translateY(-4px);
+  }
+  
+  .upload-title {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+  
+  .upload-text {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    
+    em {
+      font-style: normal;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+  }
+  
+  .upload-tip {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    margin-top: 16px;
+  }
+}
+
+// ============================================
+// Input Fields - Neumorphism Style
+// ============================================
+
+.input {
+  width: 100%;
+  padding: 14px 18px;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-neu-pressed);
+  transition: all var(--transition-fast);
+  
+  &::placeholder {
+    color: var(--text-tertiary);
+  }
+  
+  &:hover {
+    background: var(--bg-tertiary);
+  }
+  
+  &:focus {
+    outline: none;
+    background: var(--bg-card);
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-neu-flat);
+  }
+}
+
+// ============================================
+// Link Box - For image URLs
+// ============================================
+
+.link-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  
+  .link-label {
+    width: 80px;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  
+  .link-input {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .link-copy {
+    flex-shrink: 0;
+  }
+}
+
+// ============================================
+// Tags / Badges
+// ============================================
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  
+  &--success {
+    background: var(--accent-success-bg);
+    color: var(--accent-success);
+  }
+  
+  &--warning {
+    background: var(--accent-warning-bg);
+    color: var(--accent-warning);
+  }
+  
+  &--danger {
+    background: var(--accent-danger-bg);
+    color: var(--accent-danger);
+  }
+}
+
+// ============================================
+// Theme Toggle
+// ============================================
+
+.theme-toggle {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-neu-pressed);
+  transition: background var(--transition-fast);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background: var(--bg-card);
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-base);
+  }
+  
+  &.is-dark::before {
+    transform: translateX(28px);
+  }
+  
+  .toggle-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: opacity var(--transition-fast);
+    
+    &--sun {
+      left: 8px;
+      color: var(--accent-warning);
+      opacity: 1;
+    }
+    
+    &--moon {
+      right: 8px;
+      color: var(--text-tertiary);
+      opacity: 0.5;
+    }
+  }
+  
+  &.is-dark {
+    .toggle-icon--sun {
+      opacity: 0.5;
+    }
+    
+    .toggle-icon--moon {
+      opacity: 1;
+      color: var(--text-secondary);
+    }
+  }
+}
+
+// ============================================
+// Scrollbar
+// ============================================
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-dark);
+  border-radius: var(--radius-full);
+  
+  &:hover {
+    background: var(--text-tertiary);
+  }
+}
+
+// ============================================
+// Selection
+// ============================================
+
+::selection {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+// ============================================
+// Element Plus Overrides
+// ============================================
+
+.el-button {
+  --el-button-bg-color: var(--bg-secondary);
+  --el-button-border-color: transparent;
+  --el-button-text-color: var(--text-primary);
+  --el-button-hover-bg-color: var(--bg-tertiary);
+  --el-button-hover-border-color: transparent;
+  --el-button-hover-text-color: var(--text-primary);
+  
+  font-family: var(--font-sans);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-neu-flat);
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-neu-pressed);
+  }
+  
+  &--primary {
+    --el-button-bg-color: var(--accent-primary);
+    --el-button-border-color: var(--accent-primary);
+    --el-button-text-color: var(--text-inverse);
+    --el-button-hover-bg-color: var(--accent-primary-hover);
+    --el-button-hover-border-color: var(--accent-primary-hover);
+    --el-button-hover-text-color: var(--text-inverse);
+  }
+}
+
+.el-input {
+  --el-input-bg-color: var(--bg-secondary);
+  --el-input-border-color: transparent;
+  --el-input-text-color: var(--text-primary);
+  --el-input-placeholder-color: var(--text-tertiary);
+  --el-input-hover-border-color: var(--border-medium);
+  --el-input-focus-border-color: var(--border-dark);
+  
+  .el-input__wrapper {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-neu-pressed);
+    transition: all var(--transition-fast);
+    
+    &:hover {
+      box-shadow: var(--shadow-neu-pressed);
+    }
+    
+    &.is-focus {
+      box-shadow: var(--shadow-neu-flat);
+    }
+  }
+}
+
+.el-card {
+  --el-card-bg-color: var(--bg-card);
+  --el-card-border-color: transparent;
+  
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-neu-flat);
+}
+
+.el-dialog {
+  --el-dialog-bg-color: var(--bg-card);
+  --el-dialog-title-font-size: var(--text-lg);
+  
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.el-message {
+  --el-message-bg-color: var(--bg-card);
+  --el-message-border-color: var(--border-light);
+  
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.el-dropdown-menu {
+  --el-dropdown-menuItem-hover-fill: var(--bg-secondary);
+  --el-dropdown-menuItem-hover-color: var(--text-primary);
+  
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+}
+
+.el-table {
+  --el-table-bg-color: var(--bg-card);
+  --el-table-tr-bg-color: var(--bg-card);
+  --el-table-header-bg-color: var(--bg-secondary);
+  --el-table-row-hover-bg-color: var(--bg-secondary);
+  --el-table-border-color: var(--border-light);
+  --el-table-text-color: var(--text-primary);
+  --el-table-header-text-color: var(--text-secondary);
+}
+
+.el-pagination {
+  --el-pagination-bg-color: var(--bg-secondary);
+  --el-pagination-text-color: var(--text-secondary);
+  --el-pagination-button-bg-color: var(--bg-secondary);
+  --el-pagination-hover-color: var(--text-primary);
+}
+
+.el-tag {
+  border-radius: var(--radius-full);
+  border: none;
+  
+  &--success {
+    --el-tag-bg-color: var(--accent-success-bg);
+    --el-tag-text-color: var(--accent-success);
+  }
+  
+  &--warning {
+    --el-tag-bg-color: var(--accent-warning-bg);
+    --el-tag-text-color: var(--accent-warning);
+  }
+  
+  &--danger {
+    --el-tag-bg-color: var(--accent-danger-bg);
+    --el-tag-text-color: var(--accent-danger);
+  }
+}
+
+.el-menu {
+  --el-menu-bg-color: transparent;
+  --el-menu-text-color: var(--text-secondary);
+  --el-menu-active-color: var(--text-primary);
+  --el-menu-hover-bg-color: var(--bg-secondary);
+}
+
+.el-tabs {
+  --el-tabs-header-height: 48px;
+  
+  .el-tabs__item {
+    color: var(--text-secondary);
+    
+    &.is-active {
+      color: var(--text-primary);
+    }
+    
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+  
+  .el-tabs__active-bar {
+    background-color: var(--accent-primary);
+  }
+}
+
+// ============================================
+// Dark Mode Specific Overrides
+// ============================================
+
+[data-theme="dark"] {
+  // Element Plus core colors
+  --el-color-primary: var(--accent-primary);
+  --el-color-success: var(--accent-success);
+  --el-color-warning: var(--accent-warning);
+  --el-color-danger: var(--accent-danger);
+  --el-color-info: var(--text-tertiary);
+  
+  // Text colors
+  --el-text-color-primary: var(--text-primary);
+  --el-text-color-regular: var(--text-secondary);
+  --el-text-color-secondary: var(--text-tertiary);
+  --el-text-color-placeholder: var(--text-tertiary);
+  
+  // Background colors
+  --el-bg-color: var(--bg-card);
+  --el-bg-color-page: var(--bg-primary);
+  --el-bg-color-overlay: var(--bg-card);
+  
+  // Border colors
+  --el-border-color: var(--border-light);
+  --el-border-color-light: var(--border-light);
+  --el-border-color-lighter: var(--border-light);
+  --el-border-color-dark: var(--border-dark);
+  
+  // Fill colors
+  --el-fill-color: var(--bg-secondary);
+  --el-fill-color-light: var(--bg-secondary);
+  --el-fill-color-lighter: var(--bg-tertiary);
+  --el-fill-color-blank: var(--bg-card);
+  
+  // Button overrides for dark mode - Add visible borders
+  .el-button {
+    border: 1px solid var(--border-medium);
+    box-shadow: none;
+    
+    &:hover {
+      border-color: var(--border-dark);
+      transform: none;
+    }
+    
+    &:active {
+      box-shadow: none;
+    }
+    
+    &--primary {
+      border-color: var(--accent-primary);
+      
+      &:hover {
+        border-color: var(--accent-primary-hover);
+      }
+    }
+    
+    &--default {
+      background: var(--bg-secondary);
+      border-color: var(--border-medium);
+      color: var(--text-primary);
+      
+      &:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--border-dark);
+        color: var(--text-primary);
+      }
+    }
+  }
+  
+  // Mask
+  --el-mask-color: rgba(0, 0, 0, 0.7);
+  --el-overlay-color: rgba(0, 0, 0, 0.7);
+  
+  // Dropdown
+  .el-dropdown-menu {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    
+    .el-dropdown-menu__item {
+      color: var(--text-primary);
+      
+      &:hover {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+    }
+  }
+  
+  // Dialog
+  .el-dialog {
+    background: var(--bg-card);
+    
+    .el-dialog__header {
+      border-bottom-color: var(--border-light);
+    }
+    
+    .el-dialog__title {
+      color: var(--text-primary);
+    }
+  }
+  
+  // Message
+  .el-message {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    
+    .el-message__content {
+      color: var(--text-primary);
+    }
+  }
+  
+  // Message Box
+  .el-message-box {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    
+    .el-message-box__title {
+      color: var(--text-primary);
+    }
+    
+    .el-message-box__message {
+      color: var(--text-secondary);
+    }
+  }
+  
+  // Input
+  .el-input__wrapper {
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-neu-pressed);
+    
+    .el-input__inner {
+      color: var(--text-primary);
+      
+      &::placeholder {
+        color: var(--text-tertiary);
+      }
+    }
+  }
+  
+  // Select
+  .el-select-dropdown {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    
+    .el-select-dropdown__item {
+      color: var(--text-primary);
+      
+      &.is-hovering {
+        background: var(--bg-secondary);
+      }
+      
+      &.is-selected {
+        color: var(--accent-primary);
+        font-weight: 600;
+      }
+    }
+  }
+  
+  // Table
+  .el-table {
+    background: var(--bg-card);
+    
+    th.el-table__cell {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+    }
+    
+    td.el-table__cell {
+      border-color: var(--border-light);
+    }
+    
+    .el-table__row:hover > td.el-table__cell {
+      background: var(--bg-secondary);
+    }
+  }
+  
+  // Popper (tooltip, popover)
+  .el-popper {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    color: var(--text-primary);
+    
+    .el-popper__arrow::before {
+      background: var(--bg-card);
+      border-color: var(--border-light);
+    }
+  }
+  
+  // Form
+  .el-form-item__label {
+    color: var(--text-secondary);
+  }
+  
+  .el-form-item__error {
+    color: var(--accent-danger);
+  }
+  
+  // Descriptions
+  .el-descriptions {
+    .el-descriptions__label {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+    }
+    
+    .el-descriptions__content {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+    
+    .el-descriptions__cell {
+      border-color: var(--border-light);
+    }
+  }
+  
+  // Checkbox
+  .el-checkbox__label {
+    color: var(--text-primary);
+  }
+  
+  // Radio
+  .el-radio__label {
+    color: var(--text-primary);
+  }
+  
+  // Switch
+  .el-switch__label {
+    color: var(--text-secondary);
+    
+    &.is-active {
+      color: var(--text-primary);
+    }
+  }
+  
+  // Loading
+  .el-loading-mask {
+    background: rgba(12, 10, 9, 0.8);
+  }
+  
+  // Notification
+  .el-notification {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    
+    .el-notification__title {
+      color: var(--text-primary);
+    }
+    
+    .el-notification__content {
+      color: var(--text-secondary);
+    }
+  }
+}
